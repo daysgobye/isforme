@@ -1,17 +1,28 @@
-const setCache = async (c: any, key: string, data: string) => await c.env.ISFORME.put(key, data);
-const getCache = async (c: any, key: string) => await c.env.ISFORME.get(key);
+import { PageData } from "./types";
 
-export const set = async (c: any, key: string, data: Record<string, any>) => {
+const setCache = async (c: any, key: string, data: string) => await c.env.IS_FOR_ME.put(key, data);
+const getCache = async (c: any, key: string) => await c.env.IS_FOR_ME.get(key);
+
+
+export const addMessage = async (c: any, key: string, message: string) => {
+    const data = await get(c, key, { route: key, messages: [] })
+    data.messages.push(message)
+    await set(c, key, data)
+};
+
+
+export const set = async (c: any, key: string, data: PageData) => {
     let value = ""
     try {
         value = JSON.stringify(data)
     } catch (error) {
 
     }
-
+    console.log("setting value:", value)
     await setCache(c, key, value)
+    return value
 };
-export const get = async (c: any, key: string, fallback: Record<string, any> = {}) => {
+export const get = async (c: any, key: string, fallback: PageData = { route: "/", messages: [] }): Promise<PageData> => {
     try {
         const value = await getCache(c, key);
         if (value) {

@@ -1,4 +1,4 @@
-export type pageData = {
-    route: string
+export type PageData = {
+    path: string
     messages: string[]
 }
