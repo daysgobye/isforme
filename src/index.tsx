@@ -17,7 +17,6 @@ const app = new Hono<{ Bindings: Bindings }>()
 
 app.get('/*', async (c) => {
     const pageData = await get(c.env.DB, c.req.path)
-    console.log("page data", pageData)
     return c.html(
         <Content pageData={pageData as unknown as PageData} />)
 })

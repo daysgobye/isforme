@@ -10,12 +10,25 @@ export const Html = (props: { children: any, title: string }) => html`
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <script src="https://unpkg.com/htmx.org@1.9.3"></script>
       <script src="https://unpkg.com/hyperscript.org@0.9.9"></script>
-
+      <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
       <title>${props.title}</title>
+      <style>
+      body>* {
+        grid-column: none;
+    }
+
+      </style>
     </head>
-    <body>
+    <body style="
+    padding:  10px;
+    display:flex;
+    ">   
+    
+     <main class="">
+
 
         ${props.children}
+        </main>
 
     </body>
   </html>
