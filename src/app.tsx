@@ -16,6 +16,20 @@ export const Html = (props: { children: any, title: string }) => html`
       body>* {
         grid-column: none;
     }
+    .fm-input{
+      width: 90%;
+    }
+    .fm-button{
+      width: 9%;
+    }
+    .fm-form{
+      position: fixed;
+      bottom: 2px;
+      width: 99vw;
+      display: flex;
+      justify-content: space-around;
+      flex-direction: row;
+    }
 
       </style>
     </head>
