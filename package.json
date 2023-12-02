@@ -3,7 +3,9 @@
     "dev": "wrangler dev src/index.tsx",
     "deploy": "wrangler deploy --minify src/index.tsx",
     "generate": "drizzle-kit generate:sqlite",
-    "up": "drizzle-kit up:sqlite"
+    "up": "drizzle-kit up:sqlite",
+    "d1push_local": "wrangler d1 execute isforme --local --file=./drizzle/0001_chunky_nextwave.sql",
+    "d1push_live": "wrangler d1 execute isforme --file=./drizzle/0001_chunky_nextwave.sql"
   },
   "dependencies": {
     "@hono/zod-validator": "^0.1.11",

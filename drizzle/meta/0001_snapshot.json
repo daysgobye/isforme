@@ -1,0 +1,51 @@
+{
+  "version": "5",
+  "dialect": "sqlite",
+  "id": "e5be60c1-df9c-473c-a5c2-771277c0a4af",
+  "prevId": "fe18ee26-8c28-49f4-b3ac-c470d0ae4a68",
+  "tables": {
+    "page": {
+      "name": "page",
+      "columns": {
+        "path": {
+          "name": "path",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "messages": {
+          "name": "messages",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "readPw": {
+          "name": "readPw",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "writePw": {
+          "name": "writePw",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}

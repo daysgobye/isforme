@@ -2,6 +2,7 @@ import { html } from "hono/html";
 import { PageData } from "./types";
 import Messages from "./components/messages";
 import Input from "./components/input";
+import NewPage from "./components/new_page";
 
 export const Html = (props: { children: any, title: string }) => html`
   <!DOCTYPE html>
@@ -49,11 +50,23 @@ export const Html = (props: { children: any, title: string }) => html`
 `
 type ContentProps = { pageData: PageData }
 
-export const Content = ({ pageData }: ContentProps) => (
-  <Html title={pageData.path} >
-    <h1>{pageData.path}</h1>
-    <Messages messages={pageData.messages} />
-    <Input
-      route={pageData.path} />
-  </Html>
-)
+export const Content = ({ pageData }: ContentProps) => {
+  const renderMessages = () => {
+    if (pageData.messages.length === 0) {
+      if ((pageData.writePw === null || pageData.writePw === "") && (pageData.readPw === null || pageData.readPw === "")) {
+        return (<NewPage route={pageData.path} />)
+      }
+    }
+    return (<Messages messages={pageData.messages} />)
+
+  }
+  return (
+    <Html title={pageData.path} >
+      <h1>{pageData.path}</h1>
+      {renderMessages()}
+      <Input
+        wrightPw={pageData.writePw !== null && pageData.writePw !== ""}
+        route={pageData.path} />
+    </Html>
+  )
+}

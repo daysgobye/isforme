@@ -1,10 +1,19 @@
-type Props = { route: string }
-const Input = ({ route }: Props) => (
+type Props = {
+    route: string
+    wrightPw: boolean
+}
+const Input = ({ route, wrightPw }: Props) => (
     <form class="fm-form"
         hx-post={route}
         hx-target="#messages"
-        hx-swap="beforebegin"
+        hx-swap="beforeend"
         _="on htmx:afterRequest reset() me">
+        {wrightPw && (<input
+            class="fm-input"
+            name="writePw"
+            type="text"
+            placeholder="Write Password"
+        />)}
         <input
             class="fm-input"
             name="message"

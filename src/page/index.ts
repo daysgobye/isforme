@@ -13,7 +13,7 @@ export const get = async (BINDING: any, path: string,): Promise<PageData> => {
     if (dbpage) {
         return pageToPageData(dbpage)
     } else {
-        const tempvalue = { path, messages: JSON.stringify([]) }
+        const tempvalue = { path, messages: JSON.stringify([]), readPw: null, writePw: null }
         await db.insert(page)
             .values(tempvalue)
             .onConflictDoNothing();
@@ -21,17 +21,36 @@ export const get = async (BINDING: any, path: string,): Promise<PageData> => {
     }
 }
 
-export const update = async (BINDING: any, path: string, message: string) => {
+export const update = async (BINDING: any, path: string, message: string, writePw: string | undefined) => {
     const db = drizzle(BINDING, { schema });
     const oldData = await get(BINDING, path)
-    oldData.messages.push(message)
+    if (oldData.writePw) {
+        if (writePw !== oldData.writePw) { throw new Error("Wrong Password") }
+        else {
+            oldData.messages.push(message)
+
+        }
+    } else {
+        oldData.messages.push(message)
+    }
     const messageString = JSON.stringify(oldData.messages)
     const dbpage = await db.update(page).set({ messages: messageString }).where(eq(page.path, path)).returning({ updatedId: page.path })
-    console.log(dbpage)
     return message
 }
 
-const pageToPageData = (page: { path: string, messages: string | null }) => {
+export const SetPW = async (BINDING: any, path: string, writePw: string, readPw: string) => {
+    const db = drizzle(BINDING, { schema });
+    const oldData = await get(BINDING, path)
+    if ((oldData.writePw === null || oldData.writePw === "") &&
+        (oldData.readPw === null || oldData.readPw === "")) {
+        console.log("setting passwords", path, { writePw, readPw })
+        const dbpage = await db.update(page).set({ writePw, readPw }).where(eq(page.path, path)).returning({ updatedId: page.path })
+    } else {
+        throw new Error("PW already set")
+    }
+}
+
+const pageToPageData = (page: { path: string, messages: string | null, readPw: string | null, writePw: string | null }) => {
     let messages: string[] = []
     try {
         if (page.messages)
@@ -39,5 +58,5 @@ const pageToPageData = (page: { path: string, messages: string | null }) => {
     } catch (error) {
 
     }
-    return { path: page.path, messages }
+    return { ...page, messages } as PageData;
 }
