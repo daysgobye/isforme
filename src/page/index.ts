@@ -6,6 +6,7 @@ import { PageData } from '../types';
 
 
 
+
 export const get = async (BINDING: any, path: string,): Promise<PageData> => {
     const db = drizzle(BINDING, { schema });
 
@@ -21,22 +22,65 @@ export const get = async (BINDING: any, path: string,): Promise<PageData> => {
     }
 }
 
-export const update = async (BINDING: any, path: string, message: string, writePw: string | undefined) => {
-    const db = drizzle(BINDING, { schema });
+const getOldData = async (BINDING: any, path: string, writePw: string | undefined) => {
     const oldData = await get(BINDING, path)
     if (oldData.writePw) {
         if (writePw !== oldData.writePw) { throw new Error("Wrong Password") }
-        else {
-            oldData.messages.push(message)
 
-        }
-    } else {
-        oldData.messages.push(message)
     }
-    const messageString = JSON.stringify(oldData.messages)
-    const dbpage = await db.update(page).set({ messages: messageString }).where(eq(page.path, path)).returning({ updatedId: page.path })
+    return oldData
+}
+const setData = async (BINDING: any, path: string, newData: PageData) => {
+    const db = drizzle(BINDING, { schema });
+    const messageString = JSON.stringify(newData.messages)
+    return await db.update(page).set({ messages: messageString }).where(eq(page.path, path)).returning({ updatedId: page.path })
+}
+
+export const update = async (BINDING: any, path: string, message: string, writePw: string | undefined) => {
+    const oldData = await getOldData(BINDING, path, writePw)
+    oldData.messages.push(message)
+    const dbpage = await setData(BINDING, path, oldData)
     return message
 }
+
+export const updateAllMessages = async (BINDING: any, path: string, messages: string[], writePw: string | undefined) => {
+    const oldData = await getOldData(BINDING, path, writePw)
+    oldData.messages = messages
+    const dbpage = await setData(BINDING, path, oldData)
+    return messages
+}
+
+
+
+export const removeIndex = async (BINDING: any, path: string, index: number, writePw: string | undefined) => {
+    const oldData = await getOldData(BINDING, path, writePw)
+
+    if (index <= oldData.messages.length - 1) {
+        oldData.messages.splice(index, 1)
+    } else {
+        throw new Error("Index out of bounds")
+    }
+    const dbpage = await setData(BINDING, path, oldData)
+
+    return index
+}
+
+export const swapIndex = async (BINDING: any, path: string, indexA: number, indexB: number, writePw: string | undefined) => {
+    const oldData = await getOldData(BINDING, path, writePw)
+    console.log(oldData.messages.length, indexA <= oldData.messages.length - 1 && indexB <= oldData.messages.length - 1, indexA, indexB)
+    if (indexA <= oldData.messages.length - 1 && indexB <= oldData.messages.length - 1) {
+        let temp = oldData.messages[indexA];
+        oldData.messages[indexA] = oldData.messages[indexB];
+        oldData.messages[indexB] = temp;
+    } else {
+        throw new Error("Index out of bounds")
+    }
+    const dbpage = await setData(BINDING, path, oldData)
+
+    return dbpage
+}
+
+
 
 export const SetPW = async (BINDING: any, path: string, writePw: string, readPw: string) => {
     const db = drizzle(BINDING, { schema });

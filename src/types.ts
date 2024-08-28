@@ -13,3 +13,7 @@ export type Addon = {
     author: string
     files: string[]
 }
+export enum Theme {
+    DARK = "<!--theme = dark-->",
+    LIGHT = "<!--theme = light-->"
+}

@@ -7,22 +7,27 @@ const Input = ({ route, wrightPw }: Props) => (
         hx-post={route}
         hx-target="#messages"
         hx-swap="beforeend"
-        _="on htmx:afterRequest reset() me">
-        {wrightPw && (<input
-            class="fm-input"
-            name="writePw"
-            type="text"
-            placeholder="Write Password"
-        />)}
-        <input
-            class="fm-input"
-            name="message"
-            type="text"
-            placeholder="Somethings are just for me"
-        />
+        _="on htmx:afterRequest set value of #message_input to ''"
+    >
+        <div class={`grid fm-inputs ${wrightPw ? "grid12" : ""}`}>
+            {wrightPw && (<input
+                class="fm-input"
+                name="writePw"
+                id="writePw"
 
+                type="password"
+                placeholder="Write Password"
+            />)}
+            <input
+                class="fm-input"
+                name="message"
+                id="message_input"
+                type="text"
+                placeholder="/help"
+            />
+        </div>
         <button class="fm-button" type="submit">
-            for me
+            post
         </button>
     </form >
 )

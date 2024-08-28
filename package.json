@@ -8,10 +8,11 @@
     "d1push_live": "wrangler d1 execute isforme --file=./drizzle/0001_chunky_nextwave.sql"
   },
   "dependencies": {
-    "@hono/zod-validator": "^0.1.11",
-    "drizzle-orm": "^0.29.0",
-    "hono": "^3.10.0",
-    "zod": "^3.22.4"
+    "@hono/zod-validator": "^0.2.2",
+    "drizzle-orm": "^0.31.2",
+    "hono": "^4.4.8",
+    "snarkdown": "^2.0.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20230914.0",
