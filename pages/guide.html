@@ -1,0 +1,705 @@
+<>
+    {html`
+    <style>
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #4ecdc4;
+            --accent: #ffe66d;
+            --dark: #2d3436;
+            --light: #f9f9f9;
+            --border-width: 4px;
+            --border-radius: 0;
+            --font-family: 'Courier New', monospace;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header styles */
+        header {
+            background-color: var(--accent);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: var(--border-width) solid black;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin: 0;
+            color: black;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        /* Neobrutalist styles */
+        .neo-box {
+            background-color: white;
+            border: var(--border-width) solid black;
+            box-shadow: 8px 8px 0 black;
+            padding: 30px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .neo-box:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 10px 10px 0 black;
+            transition: all 0.2s ease;
+        }
+
+        /* Section headers */
+        .section-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px;
+            margin: -30px -30px 30px -30px;
+            border-bottom: var(--border-width) solid black;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .section-icon {
+            font-size: 2rem;
+            background-color: white;
+            color: var(--primary);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid black;
+        }
+
+        /* Content styling */
+        .content-section {
+            margin-bottom: 30px;
+        }
+
+        .content-section h3 {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 10px;
+            margin-top: 30px;
+            font-size: 1.5rem;
+        }
+
+        .content-section h4 {
+            color: var(--dark);
+            margin-top: 25px;
+            font-size: 1.3rem;
+        }
+
+        /* Code blocks */
+        pre,
+        code {
+            font-family: 'Courier New', monospace;
+            background-color: #f1f1f1;
+            border: 2px solid #ddd;
+            border-radius: 0;
+            padding: 2px 5px;
+        }
+
+        pre {
+            padding: 15px;
+            overflow-x: auto;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border: 3px solid black;
+        }
+
+        th {
+            background-color: var(--secondary);
+            color: black;
+            text-align: left;
+            padding: 12px;
+            border: 2px solid black;
+        }
+
+        td {
+            padding: 12px;
+            border: 2px solid black;
+            background-color: white;
+        }
+
+        /* Example boxes */
+        .example-box {
+            background-color: var(--accent);
+            border: 3px solid black;
+            padding: 15px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .example-box::before {
+            content: "EXAMPLE";
+            position: absolute;
+            top: -15px;
+            left: 10px;
+            background-color: black;
+            color: var(--accent);
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Tips */
+        .tip-box {
+            background-color: var(--secondary);
+            border: 3px solid black;
+            padding: 15px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .tip-box::before {
+            content: "PRO TIP";
+            position: absolute;
+            top: -15px;
+            left: 10px;
+            background-color: black;
+            color: var(--secondary);
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Command styling */
+        .command {
+            background-color: black;
+            color: white;
+            font-family: monospace;
+            padding: 10px 15px;
+            margin: 10px 0;
+            display: inline-block;
+        }
+
+        /* Stickers */
+        .sticker {
+            position: absolute;
+            background-color: white;
+            border: 3px solid black;
+            padding: 15px;
+            transform: rotate(var(--rotate));
+            box-shadow: 4px 4px 0 black;
+            z-index: 10;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .sticker-1 {
+            --rotate: -5deg;
+            top: -20px;
+            right: 30px;
+        }
+
+        .sticker-2 {
+            --rotate: 3deg;
+            bottom: -15px;
+            left: 40px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section-header {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 30px;
+            }
+
+            .section-icon {
+                margin-top: -45px;
+            }
+
+            .sticker {
+                display: none;
+            }
+        }
+
+        /* Navigation */
+        .guide-nav {
+            position: sticky;
+            top: 20px;
+            background-color: white;
+            border: var(--border-width) solid black;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 5px 5px 0 black;
+        }
+
+        .guide-nav h3 {
+            margin-top: 0;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+        }
+
+        .guide-nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .guide-nav li {
+            margin-bottom: 10px;
+        }
+
+        .guide-nav a {
+            color: var(--dark);
+            text-decoration: none;
+            display: block;
+            padding: 5px 0;
+            border-left: 3px solid transparent;
+            padding-left: 10px;
+        }
+
+        .guide-nav a:hover {
+            border-left: 3px solid var(--primary);
+            color: var(--primary);
+        }
+
+        /* Two column layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background-color: var(--dark);
+            color: white;
+            border-top: var(--border-width) solid black;
+        }
+    </style>
+    `}
+
+    <header>
+        <h1>ismy.space Guide</h1>
+        <p>Power up your space with these tips and tricks!</p>
+    </header>
+
+    <div class="container">
+        <div class="two-column">
+            <div>
+                <nav class="guide-nav">
+                    <h3>Quick Navigation</h3>
+                    <ul>
+                        <li><a href="#commands">/ Commands</a></li>
+                        <li><a href="#links-images">Links and Images</a></li>
+                        <li><a href="#html-markdown">HTML & Markdown</a></li>
+                        <li><a href="#headings">Headings</a></li>
+                        <li><a href="#text-formatting">Text Formatting</a></li>
+                        <li><a href="#lists">Lists</a></li>
+                        <li><a href="#styles">Styles (HTML Only)</a></li>
+                        <li><a href="#css-libraries">CSS Libraries</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div>
+                <div class="neo-box" id="commands">
+                    <div class="section-header">
+                        <div class="section-icon">/</div>
+                        <h2>Commands</h2>
+                    </div>
+                    <div class="sticker sticker-1">Essential!</div>
+
+                    <div class="content-section">
+                        <p>To adjust things that seem out of your control, you can use the / commands.</p>
+
+                        <div class="example-box">
+                            <p>To remove a post, simply type: <span class="command">/remove id=10</span></p>
+                            <p>To get a full list of commands, type: <span class="command">/help</span></p>
+                        </div>
+
+                        <div class="tip-box">
+                            <p>Commands are case-sensitive, so make sure to type them exactly as shown.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="neo-box" id="links-images">
+                    <div class="section-header">
+                        <div class="section-icon">🔗</div>
+                        <h2>Links and Images</h2>
+                    </div>
+
+                    <div class="content-section">
+                        <p>Your space supports links and images. To use them, simply paste in the URL and it will be
+                            turned into a link right away.</p>
+
+                        <div class="example-box">
+                            <p>Paste: <code>https://example.com</code></p>
+                            <p>Result: <a href="#">https://example.com</a></p>
+                            <hr>
+                            <p>Paste an image URL: <code>https://example.com/image.jpg</code></p>
+                            <p>Result: The image will display with the URL below it</p>
+                        </div>
+
+                        <div class="tip-box">
+                            <p>You can also use HTML or Markdown to create more customized links and images!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="neo-box" id="html-markdown">
+                    <div class="section-header">
+                        <div class="section-icon">&lt;/&gt;</div>
+                        <h2>HTML & Markdown</h2>
+                    </div>
+                    <div class="sticker sticker-2">Powerful!</div>
+
+                    <div class="content-section">
+                        <p>All spaces support HTML & Markdown. This lets you get the bones of your space the way you
+                            want them.</p>
+
+                        <h3 id="headings">Headings</h3>
+                        <p>To create a heading, add number signs (#) in front of a word or phrase. The number of number
+                            signs you use should correspond to the heading level.</p>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Markdown</th>
+                                    <th>HTML</th>
+                                    <th>Rendered Output</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code># Heading level 1</code></td>
+                                    <td><code>&lt;h1&gt;Heading level 1&lt;/h1&gt;</code></td>
+                                    <td>
+                                        <h1 style="margin:0;font-size:2em;">Heading level 1</h1>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>## Heading level 2</code></td>
+                                    <td><code>&lt;h2&gt;Heading level 2&lt;/h2&gt;</code></td>
+                                    <td>
+                                        <h2 style="margin:0;font-size:1.8em;">Heading level 2</h2>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>### Heading level 3</code></td>
+                                    <td><code>&lt;h3&gt;Heading level 3&lt;/h3&gt;</code></td>
+                                    <td>
+                                        <h3 style="margin:0;font-size:1.5em;">Heading level 3</h3>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>#### Heading level 4</code></td>
+                                    <td><code>&lt;h4&gt;Heading level 4&lt;/h4&gt;</code></td>
+                                    <td>
+                                        <h4 style="margin:0;font-size:1.3em;">Heading level 4</h4>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>##### Heading level 5</code></td>
+                                    <td><code>&lt;h5&gt;Heading level 5&lt;/h5&gt;</code></td>
+                                    <td>
+                                        <h5 style="margin:0;font-size:1.1em;">Heading level 5</h5>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>###### Heading level 6</code></td>
+                                    <td><code>&lt;h6&gt;Heading level 6&lt;/h6&gt;</code></td>
+                                    <td>
+                                        <h6 style="margin:0;font-size:1em;">Heading level 6</h6>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3 id="text-formatting">Text Formatting</h3>
+
+                        <h4>Bold</h4>
+                        <p>To bold text, add two asterisks or underscores before and after a word or phrase.</p>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Markdown</th>
+                                    <th>HTML</th>
+                                    <th>Rendered Output</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>I just love **bold text**.</code></td>
+                                    <td><code>I just love &lt;strong&gt;bold text&lt;/strong&gt;.</code></td>
+                                    <td>I just love <strong>bold text</strong>.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>I just love __bold text__.</code></td>
+                                    <td><code>I just love &lt;strong&gt;bold text&lt;/strong&gt;.</code></td>
+                                    <td>I just love <strong>bold text</strong>.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Love**is**bold</code></td>
+                                    <td><code>Love&lt;strong&gt;is&lt;/strong&gt;bold</code></td>
+                                    <td>Love<strong>is</strong>bold</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>Italic</h4>
+                        <p>To italicize text, add one asterisk or underscore before and after a word or phrase.</p>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Markdown</th>
+                                    <th>HTML</th>
+                                    <th>Rendered Output</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>Italicized text is the *cat's meow*.</code></td>
+                                    <td><code>Italicized text is the &lt;em&gt;cat's meow&lt;/em&gt;.</code></td>
+                                    <td>Italicized text is the <em>cat's meow</em>.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Italicized text is the _cat's meow_.</code></td>
+                                    <td><code>Italicized text is the &lt;em&gt;cat's meow&lt;/em&gt;.</code></td>
+                                    <td>Italicized text is the <em>cat's meow</em>.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>A*cat*meow</code></td>
+                                    <td><code>A&lt;em&gt;cat&lt;/em&gt;meow</code></td>
+                                    <td>A<em>cat</em>meow</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3 id="lists">Lists</h3>
+                        <p>To create an unordered list, add dashes (-), asterisks (*), or plus signs (+) in front of
+                            line items. Indent one or more items to create a nested list.</p>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Markdown</th>
+                                    <th>HTML</th>
+                                    <th>Rendered Output</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>
+                                            1. First item<br>
+                                            2. Second item<br>
+                                            3. Third item<br>
+                                            4. Fourth item
+                                        </code>
+                                    </td>
+                                    <td>
+                                        <code>
+                                            &lt;ol&gt;<br>
+                                            &nbsp;&nbsp;&lt;li&gt;First item&lt;/li&gt;<br>
+                                            &nbsp;&nbsp;&lt;li&gt;Second item&lt;/li&gt;<br>
+                                            &nbsp;&nbsp;&lt;li&gt;Third item&lt;/li&gt;<br>
+                                            &nbsp;&nbsp;&lt;li&gt;Fourth item&lt;/li&gt;<br>
+                                            &lt;/ol&gt;
+                                        </code>
+                                    </td>
+                                    <td>
+                                        <ol>
+                                            <li>First item</li>
+                                            <li>Second item</li>
+                                            <li>Third item</li>
+                                            <li>Fourth item</li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>
+                                            * First item<br>
+                                            * Second item<br>
+                                            * Third item<br>
+                                            * Fourth item
+                                        </code>
+                                    </td>
+                                    <td>
+                                        <code>
+                                            &lt;ul&gt;<br>
+                                            &nbsp;&nbsp;&lt;li&gt;First item&lt;/li&gt;<br>
+                                            &nbsp;&nbsp;&lt;li&gt;Second item&lt;/li&gt;<br>
+                                            &nbsp;&nbsp;&lt;li&gt;Third item&lt;/li&gt;<br>
+                                            &nbsp;&nbsp;&lt;li&gt;Fourth item&lt;/li&gt;<br>
+                                            &lt;/ul&gt;
+                                        </code>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li>First item</li>
+                                            <li>Second item</li>
+                                            <li>Third item</li>
+                                            <li>Fourth item</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code>
+                                            - First item<br>
+                                            - Second item<br>
+                                            - Third item<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;- Indented item<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;- Indented item<br>
+                                            - Fourth item
+                                        </code>
+                                    </td>
+                                    <td>
+                                        <code>
+                                            &lt;ul&gt;<br>
+                                            &nbsp;&nbsp;&lt;li&gt;First item&lt;/li&gt;<br>
+                                            &nbsp;&nbsp;&lt;li&gt;Second item&lt;/li&gt;<br>
+                                            &nbsp;&nbsp;&lt;li&gt;Third item<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;ul&gt;<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;Indented item&lt;/li&gt;<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;Indented item&lt;/li&gt;<br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br>
+                                            &nbsp;&nbsp;&lt;/li&gt;<br>
+                                            &nbsp;&nbsp;&lt;li&gt;Fourth item&lt;/li&gt;<br>
+                                            &lt;/ul&gt;
+                                        </code>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li>First item</li>
+                                            <li>Second item</li>
+                                            <li>Third item
+                                                <ul>
+                                                    <li>Indented item</li>
+                                                    <li>Indented item</li>
+                                                </ul>
+                                            </li>
+                                            <li>Fourth item</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3 id="styles">Styles (HTML Only)</h3>
+                        <p>Styles are a huge subject, but here is just enough to make you productive.</p>
+                        <p>The style tag is a special HTML tag that lets you change how things look:</p>
+
+                        <pre><code>&lt;style&gt; h2{color:red;}&lt;/style&gt;</code></pre>
+
+                        <h4>Text Color</h4>
+                        <pre><code>&lt;style&gt; h2{color:red;}&lt;/style&gt;</code></pre>
+                        <div class="example-box">
+                            <h2 style="color:red;margin:0;">This heading would be red</h2>
+                        </div>
+
+                        <h4>Background Color</h4>
+                        <pre><code>&lt;style&gt; h2{background-color:red;}&lt;/style&gt;</code></pre>
+                        <div class="example-box">
+                            <h2 style="background-color:red;color:white;margin:0;">This heading would have a red
+                                background</h2>
+                        </div>
+
+                        <h4>Text Alignment</h4>
+                        <pre><code>&lt;style&gt; h2{text-align:center;}&lt;/style&gt;</code></pre>
+                        <div class="example-box">
+                            <h2 style="text-align:center;margin:0;">This heading would be centered</h2>
+                        </div>
+
+                        <h4>Font Family</h4>
+                        <pre><code>&lt;style&gt; h2{font-family:Arial;}&lt;/style&gt;</code></pre>
+                        <div class="example-box">
+                            <h2 style="font-family:Arial,sans-serif;margin:0;">This heading would use Arial font</h2>
+                        </div>
+
+                        <h4>Font Size</h4>
+                        <pre><code>&lt;style&gt; h2{font-size:16px;}&lt;/style&gt;</code></pre>
+                        <div class="example-box">
+                            <h2 style="font-size:16px;margin:0;">This heading would be 16px in size</h2>
+                        </div>
+
+                        <h3 id="css-libraries">CSS Libraries</h3>
+                        <p>You can also include CSS libraries and just use the classes from your HTML, whether that's
+                            Bootstrap or any other library.</p>
+
+                        <h4>Bootstrap Example</h4>
+                        <pre><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"&gt;</code></pre>
+
+                        <div class="tip-box">
+                            <p><strong>Note:</strong> Any JavaScript libraries need to be added as an addon because
+                                script tags are not allowed.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2023 ismy.space - Your Instant Sharable Space</p>
+        <p>Made with ❤️ for the web</p>
+    </footer>
+
+    {
+    html`
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add random rotation to stickers for a more handmade feel
+        document.querySelectorAll('.sticker').forEach(sticker => {
+            const randomRotate = (Math.random() * 10 - 5);
+            sticker.style.setProperty('--rotate', `${randomRotate}deg`);
+        });
+    </script>
+    `
+    }
+
+
+
+</>

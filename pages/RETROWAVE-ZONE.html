@@ -1,0 +1,258 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+    :root {
+        --neon-pink: #ff00ff;
+        --neon-blue: #00ffff;
+        --neon-purple: #9900ff;
+        --dark-purple: #120458;
+        --black: #000000;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: var(--black);
+        color: #ffffff;
+        font-family: 'Orbitron', sans-serif;
+        overflow-x: hidden;
+        background-image: linear-gradient(0deg, #000033 0%, #330033 100%);
+        min-height: 100vh;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .grid {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 50vh;
+        background-image:
+            linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(255, 0, 255, 0.2) 100%),
+            linear-gradient(to right, var(--neon-purple) 2px, transparent 2px),
+            linear-gradient(to bottom, var(--neon-purple) 2px, transparent 2px);
+        background-size: 100% 100%, 40px 40px, 40px 40px;
+        transform: perspective(500px) rotateX(60deg);
+        transform-origin: bottom;
+        animation: grid-animation 10s linear infinite;
+    }
+
+    @keyframes grid-animation {
+        0% {
+            background-position: 0 0, 0 0, 0 0;
+        }
+
+        100% {
+            background-position: 0 0, 0 40px, 40px 0;
+        }
+    }
+
+    .sun {
+        position: fixed;
+        width: 200px;
+        height: 200px;
+        background: linear-gradient(to top, #ff0066, #ffcc00);
+        border-radius: 50%;
+        bottom: 30%;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: -1;
+        box-shadow: 0 0 40px #ff0066, 0 0 80px #ff0066, 0 0 120px #ff0066;
+    }
+
+    header {
+        text-align: center;
+        padding: 40px 0;
+    }
+
+    h1 {
+        font-size: 4em;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 5px;
+        color: transparent;
+        background: linear-gradient(to right, var(--neon-blue), var(--neon-pink));
+        -webkit-background-clip: text;
+        background-clip: text;
+        text-shadow:
+            0 0 10px rgba(0, 255, 255, 0.5),
+            0 0 20px rgba(0, 255, 255, 0.3),
+            0 0 30px rgba(0, 255, 255, 0.1);
+        animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+        from {
+            text-shadow:
+                0 0 10px rgba(0, 255, 255, 0.5),
+                0 0 20px rgba(0, 255, 255, 0.3),
+                0 0 30px rgba(0, 255, 255, 0.1);
+        }
+
+        to {
+            text-shadow:
+                0 0 20px rgba(0, 255, 255, 0.7),
+                0 0 30px rgba(0, 255, 255, 0.5),
+                0 0 40px rgba(0, 255, 255, 0.3);
+        }
+    }
+
+    .subtitle {
+        font-size: 1.2em;
+        color: var(--neon-pink);
+        text-shadow: 0 0 10px var(--neon-pink);
+        letter-spacing: 3px;
+    }
+
+    .content {
+        position: relative;
+        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.7);
+        border: 2px solid var(--neon-purple);
+        border-radius: 5px;
+        padding: 20px;
+        margin: 20px 0;
+        box-shadow: 0 0 20px rgba(153, 0, 255, 0.5);
+    }
+
+    .content h2 {
+        color: var(--neon-blue);
+        text-shadow: 0 0 10px var(--neon-blue);
+        border-bottom: 2px solid var(--neon-blue);
+        padding-bottom: 10px;
+    }
+
+    .tracks {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .tracks li {
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid var(--neon-pink);
+        background-color: rgba(255, 0, 255, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .tracks li:hover {
+        background-color: rgba(255, 0, 255, 0.3);
+        cursor: pointer;
+    }
+
+    .play-btn {
+        width: 30px;
+        height: 30px;
+        background-color: var(--neon-blue);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 10px var(--neon-blue);
+    }
+
+    .play-btn::after {
+        content: '';
+        width: 0;
+        height: 0;
+        border-top: 8px solid transparent;
+        border-left: 12px solid var(--dark-purple);
+        border-bottom: 8px solid transparent;
+        margin-left: 3px;
+    }
+
+    .neon-button {
+        background-color: transparent;
+        border: 2px solid var(--neon-pink);
+        color: var(--neon-pink);
+        padding: 10px 20px;
+        font-family: 'Orbitron', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+        text-shadow: 0 0 5px var(--neon-pink);
+        margin: 10px 0;
+    }
+
+    .neon-button:hover {
+        background-color: var(--neon-pink);
+        color: var(--black);
+        box-shadow: 0 0 20px var(--neon-pink);
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px 0;
+        color: var(--neon-blue);
+        font-size: 0.8em;
+        letter-spacing: 2px;
+        text-shadow: 0 0 5px var(--neon-blue);
+    }
+</style>
+<div class="grid"></div>
+<div class="sun"></div>
+
+<div class="container">
+    <header>
+        <h1>RETROWAVE ZONE</h1>
+        <p class="subtitle">// ENTER THE DIGITAL FRONTIER //</p>
+    </header>
+
+    <div class="content">
+        <h2>LATEST TRACKS</h2>
+        <ul class="tracks">
+            <li>
+                <span>Neon Dreams</span>
+                <div class="play-btn"></div>
+            </li>
+            <li>
+                <span>Midnight Drive</span>
+                <div class="play-btn"></div>
+            </li>
+            <li>
+                <span>Digital Sunset</span>
+                <div class="play-btn"></div>
+            </li>
+            <li>
+                <span>Cyber City</span>
+                <div class="play-btn"></div>
+            </li>
+            <li>
+                <span>Retro Future</span>
+                <div class="play-btn"></div>
+            </li>
+        </ul>
+
+        <button class="neon-button">Load More</button>
+    </div>
+
+    <div class="content">
+        <h2>ABOUT THE ZONE</h2>
+        <p>Welcome to my digital realm of synthwave and retrowave vibes. This space is dedicated to the aesthetic of 80s
+            futurism, neon lights, and digital landscapes.</p>
+        <p>Join me on this journey through time and space, where the past meets the future in a neon-soaked digital
+            dream.</p>
+        <button class="neon-button">Subscribe</button>
+    </div>
+
+    <div class="content">
+        <h2>UPCOMING EVENTS</h2>
+        <p>05.15 - Digital Dreams Festival</p>
+        <p>06.22 - Retrowave Night at Cyber Club</p>
+        <p>07.10 - Summer Synth Session</p>
+        <button class="neon-button">View All</button>
+    </div>
+
+    <footer>
+        © 2023 RETROWAVE ZONE // ALL RIGHTS RESERVED
+    </footer>
+</div>

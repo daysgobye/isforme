@@ -1,6 +1,7 @@
 import { removeIndex, swapIndex, update } from "./page";
 import { Addon, Theme } from "./types";
 import snarkdown from 'snarkdown';
+// import { parse } from 'tiny-markdown-parser';
 
 
 export const getAddonList = async (): Promise<Addon[]> => {
@@ -86,7 +87,17 @@ export const handleMessages = async (messages: string[]) => {
         if (img || msg.startsWith("data:image")) {
             return returnImage(msg)
         }
-        return snarkdown(createTextLinks(msg))
+        console.log(msg)
+        const links = createTextLinks(msg)
+        const languages = {
+            html: "<!-- EDITOR-HTML: -->",
+            md: "<!-- EDITOR-MD: -->",
+            css: "<!-- EDITOR-css: -->",
+        }
+        if (msg.includes(languages.html) || msg.includes(languages.css)) {
+            return msg
+        }
+        return snarkdown(links)
     }
     ))
 }

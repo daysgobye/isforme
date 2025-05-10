@@ -1,19 +1,383 @@
-<h2>So whats is this site?</h2>
-This site started as a chat-app to chat with your self. You simply go to a new URL claim it and your ready to chat with
-your self.
-We have all sent that random text to a friend of a phone number or password. just because we needed to save it for a
-bit.
-Or your on a new phone havent installed anything yet and you need a way to get a peice of text to your new device.
-Sence then I have been using it and found it to be a helpful tool for all sorts of things like:
-<ul>
-    <li>sharing a group of links instead of spamming a friend with 10 links just share one space link that you genarated
-        just for this and forget about it after you no longer need it.</li>
-    <li>Quick on boarding to new project. list all the requerments and what people need to bring with no need for
-        accounts or emails.</li>
-    <li>Idea board / colloage space.</li>
-    <li>Free link tree with so much more custmization</li>
-</ul>
+<style>
+    :root {
+        --primary: #ff6b6b;
+        --secondary: #4ecdc4;
+        --accent: #ffe66d;
+        --border-width: 4px;
+        --border-radius: 0;
+        --font-family: 'Courier New', monospace;
+    }
 
-So many google docs are made for just one use and you always need to set the promessions and have so much hassle that is
-not needed for most things.
-Here you can set a read or write password only if needed but for a quick throwaway who cares.
+    body {
+        font-family: var(--font-family);
+        background-color: #f9f9f9;
+        overflow-x: hidden;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    /* Neobrutalist styles */
+    .neo-box {
+        background-color: white;
+        border: var(--border-width) solid black;
+        box-shadow: 8px 8px 0 black;
+        padding: 20px;
+        margin-bottom: 30px;
+        position: relative;
+        transition: all 0.2s ease;
+        z-index: 11;
+
+    }
+
+    .neo-box:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 10px 10px 0 black;
+    }
+
+    /* Hero section */
+    .hero {
+        padding: 60px 20px;
+        text-align: center;
+        background-color: var(--accent);
+        border-bottom: var(--border-width) solid black;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        font-weight: 900;
+        color: black;
+    }
+
+    .hero h1 span {
+        color: var(--primary);
+    }
+
+    .hero-form {
+        max-width: 600px;
+        margin: 40px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .url-input-container {
+        display: flex;
+        background: white;
+        border: var(--border-width) solid black;
+        padding: 0;
+        box-shadow: 8px 8px 0 black;
+    }
+
+    .url-prefix {
+        background: #eee;
+        padding: 15px;
+        font-weight: bold;
+        border-right: var(--border-width) solid black;
+        white-space: nowrap;
+    }
+
+    .url-input {
+        flex-grow: 1;
+        border: none !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        font-size: 1.2rem;
+        padding: 15px !important;
+    }
+
+    .url-input:focus {
+        outline: none;
+    }
+
+    .go-button {
+        background-color: var(--primary);
+        color: black;
+        font-weight: bold;
+        font-size: 1.2rem;
+        padding: 15px 30px;
+        border: var(--border-width) solid black;
+        box-shadow: 6px 6px 0 black;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .go-button:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 8px 8px 0 black;
+    }
+
+    /* Sticker screenshots */
+    .sticker {
+        position: absolute;
+        background-color: white;
+        border: 3px solid black;
+        padding: 10px;
+        transform: rotate(var(--rotate));
+        box-shadow: 4px 4px 0 black;
+        z-index: 5;
+    }
+
+    .sticker-1 {
+        --rotate: -5deg;
+        top: 20px;
+        right: 10%;
+        width: 180px;
+        height: 120px;
+    }
+
+    .sticker-2 {
+        --rotate: 7deg;
+        bottom: -30px;
+        left: 15%;
+        width: 200px;
+        height: 150px;
+    }
+
+    .sticker-3 {
+        --rotate: -8deg;
+        top: 50%;
+        right: 5%;
+        width: 160px;
+        height: 130px;
+    }
+
+    .sticker-4 {
+        --rotate: 4deg;
+        bottom: 20%;
+        left: 5%;
+        width: 180px;
+        height: 140px;
+    }
+
+    .sticker img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Content sections */
+    .content-section {
+        padding: 40px 0;
+    }
+
+    h2 {
+        font-size: 2rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+        position: relative;
+        display: inline-block;
+    }
+
+    h2::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background-color: var(--primary);
+    }
+
+    ul,
+    ol {
+        padding-left: 20px;
+    }
+
+    li {
+        margin-bottom: 10px;
+    }
+
+    li strong {
+        color: var(--primary);
+    }
+
+    pre {
+        background-color: var(--accent);
+        border: var(--border-width) solid black;
+        padding: 20px;
+        font-style: italic;
+        box-shadow: 6px 6px 0 black;
+    }
+
+    code {
+        background-color: #eee;
+        padding: 2px 5px;
+        border: 1px solid #ddd;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .hero h1 {
+            font-size: 2.5rem;
+        }
+
+        .sticker {
+            display: none;
+        }
+
+        .url-input-container {
+            flex-direction: column;
+        }
+
+        .url-prefix {
+            border-right: none;
+            border-bottom: var(--border-width) solid black;
+        }
+    }
+</style>
+<div class="hero">
+    <div class="container">
+        <h1>ismy.space<span>/</span> - Your Instant Sharable Space</h1>
+        <p>Create your own web space instantly - no signup required!</p>
+
+        <div class="hero-form">
+            <div class="url-input-container">
+                <div class="url-prefix">ismy.space/</div>
+                <input type="text" class="url-input" id="space-name" placeholder="yourname">
+            </div>
+            <button class="go-button" id="create-space">MAKE A SPACE</button>
+        </div>
+    </div>
+
+    <!-- Sticker-like screenshots -->
+    <div class="sticker sticker-1">
+        <img src="/placeholder.svg?height=120&width=180" alt="Screenshot of ismy.space">
+    </div>
+    <div class="sticker sticker-2">
+        <img src="/placeholder.svg?height=150&width=200" alt="Screenshot of ismy.space">
+    </div>
+</div>
+
+<div class="container">
+    <div class="content-section">
+        <div class="neo-box">
+            <h2>What is ismy.space?</h2>
+            <p>ismy.space is a simple yet powerful tool that gives you an instant web space at any URL you want.
+                Just go to <strong>ismy.space/ANYTHING</strong> and claim your unique space - no signup required!</p>
+        </div>
+
+        <div class="neo-box">
+            <h2>Easy to share, easy to remember</h2>
+            <p>One of the best things about ismy.space is how easy it is to share verbally:</p>
+            <ul>
+                <li><strong>Say it out loud</strong> - "Check out ismy dot space slash myname" - no need for complicated
+                    URLs</li>
+                <li><strong>Type it easily</strong> - Simple to type without copying and pasting</li>
+                <li><strong>Personal web presence</strong> - Create a space that works like a Neocities page for
+                    personal expression</li>
+                <li><strong>Customizable</strong> - Make it your own with HTML, CSS, and markdown to express your style
+                </li>
+            </ul>
+        </div>
+
+        <div class="neo-box">
+            <h2>How it works</h2>
+            <ol>
+                <li>Visit <strong>ismy.space/</strong> followed by any word you want (e.g.,
+                    <code>ismy.space/myname</code>)
+                </li>
+                <li>Your space is instantly created</li>
+                <li>Start posting text, links, HTML, or markdown</li>
+                <li>Share your unique URL with anyone</li>
+            </ol>
+        </div>
+
+        <!-- Sticker-like screenshots -->
+        <div class="sticker sticker-3">
+            <img src="/placeholder.svg?height=130&width=160" alt="Screenshot of ismy.space">
+        </div>
+
+        <div class="neo-box">
+            <h2>Why people love it</h2>
+            <pre>"Everyone who sees this project loves it and I use it almost every day.
+                Just a simple scratch pad that is easy to share when talking."
+                - Creator</pre>
+        </div>
+
+        <div class="neo-box">
+            <h2>Perfect for:</h2>
+            <ul>
+                <li><strong>Quick sharing</strong> - Instead of spamming friends with multiple links, share one space
+                    link</li>
+                <li><strong>Project onboarding</strong> - List requirements and resources without needing accounts or
+                    emails</li>
+                <li><strong>Note taking</strong> - Save that password, phone number, or text you need temporarily</li>
+                <li><strong>Idea boards</strong> - Create a collaborative space for brainstorming</li>
+                <li><strong>Link trees</strong> - Make a customizable collection of your important links</li>
+                <li><strong>Device transfer</strong> - Get text from one device to another without installing apps</li>
+            </ul>
+        </div>
+
+        <!-- Sticker-like screenshots -->
+        <div class="sticker sticker-4">
+            <img src="/placeholder.svg?height=140&width=180" alt="Screenshot of ismy.space">
+        </div>
+
+        <div class="neo-box">
+            <h2>Powerful features</h2>
+            <ul>
+                <li>Full <strong>Markdown</strong> and <strong>HTML/CSS</strong> support</li>
+                <li>Optional password protection for read or write access</li>
+                <li>Helpful commands (try typing <code>/help</code> to see them all)</li>
+                <li>Theme customization (try <code>/theme=dark</code> or <code>/theme=light</code>)</li>
+                <li>Extendable with <a href="/addons">addons</a> for additional functionality</li>
+            </ul>
+        </div>
+
+        <div class="neo-box">
+            <h2>No hassle, just space</h2>
+            <p>Unlike Google Docs or other tools, there's no need to set permissions, create accounts, or deal with
+                complicated
+                sharing settings. For quick, throwaway spaces, just create and share!</p>
+
+            <p>Ready to try it? Just add a word after the URL and start using your space!</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const createSpaceButton = document.getElementById('create-space');
+        const spaceNameInput = document.getElementById('space-name');
+
+        // Handle button click
+        createSpaceButton.addEventListener('click', function () {
+            goToSpace();
+        });
+
+        // Handle Enter key press
+        spaceNameInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                goToSpace();
+            }
+        });
+
+        // Function to navigate to the space
+        function goToSpace() {
+            const spaceName = spaceNameInput.value.trim();
+            if (spaceName) {
+                window.location.href = '/' + spaceName;
+            } else {
+                // Add a shake animation if no input
+                spaceNameInput.classList.add('shake');
+                setTimeout(() => {
+                    spaceNameInput.classList.remove('shake');
+                }, 500);
+                spaceNameInput.focus();
+            }
+        }
+
+        // Add some random rotation to stickers for a more handmade feel
+        document.querySelectorAll('.sticker').forEach(sticker => {
+            const randomRotate = (Math.random() * 10 - 5);
+            sticker.style.setProperty('--rotate', `${randomRotate}deg`);
+        });
+    });
+</script>

@@ -1,0 +1,269 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+    :root {
+        --cat-pink: #ffb6c1;
+        --cat-purple: #d8b5ff;
+        --cat-blue: #b5d8ff;
+        --cat-yellow: #ffffc2;
+        --cat-green: #c2ffdb;
+    }
+
+    body {
+        font-family: 'Nunito', sans-serif;
+        background-color: var(--cat-pink);
+        background-image:
+            url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+            url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        margin: 0;
+        padding: 0;
+        color: #5a3d5c;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    header {
+        text-align: center;
+        padding: 20px;
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    header::before,
+    header::after {
+        content: "🐱";
+        font-size: 2em;
+        position: absolute;
+        top: 20px;
+    }
+
+    header::before {
+        left: 20px;
+    }
+
+    header::after {
+        right: 20px;
+    }
+
+    h1 {
+        font-size: 2.5em;
+        color: #ff6b9d;
+        margin: 0;
+        text-shadow: 2px 2px 0 #ffcce0;
+    }
+
+    .subtitle {
+        font-size: 1.2em;
+        color: #9d6dc4;
+    }
+
+    .cat-card {
+        background-color: white;
+        border-radius: 20px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+    }
+
+    .cat-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .cat-card h2 {
+        color: #ff6b9d;
+        border-bottom: 3px dotted var(--cat-purple);
+        padding-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .cat-card h2::before {
+        content: "🐾";
+        margin-right: 10px;
+    }
+
+    .cat-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+        margin: 20px 0;
+    }
+
+    .cat-pic {
+        background-color: var(--cat-yellow);
+        border-radius: 10px;
+        height: 150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 3em;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s;
+    }
+
+    .cat-pic:hover {
+        transform: scale(1.05);
+        background-color: var(--cat-blue);
+    }
+
+    .cat-facts {
+        background-color: var(--cat-green);
+        border-radius: 15px;
+        padding: 15px;
+        margin: 20px 0;
+    }
+
+    .cat-facts ul {
+        padding-left: 20px;
+    }
+
+    .cat-facts li {
+        margin-bottom: 10px;
+    }
+
+    .cat-facts li::marker {
+        content: "🐱 ";
+    }
+
+    .cat-button {
+        background-color: var(--cat-purple);
+        color: white;
+        border: none;
+        border-radius: 30px;
+        padding: 10px 20px;
+        font-family: 'Nunito', sans-serif;
+        font-size: 1em;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: block;
+        margin: 20px auto;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .cat-button:hover {
+        background-color: #ff6b9d;
+        transform: scale(1.05);
+    }
+
+    .paw-divider {
+        text-align: center;
+        font-size: 2em;
+        margin: 20px 0;
+        color: white;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+    }
+
+    .rainbow-text {
+        background-image: linear-gradient(to right, #ff6b9d, #9d6dc4, #6d9dc4, #6dc49d, #c4c46d);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-weight: bold;
+    }
+
+    .floating {
+        animation: floating 3s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+        0% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+
+        100% {
+            transform: translateY(0);
+        }
+    }
+</style>
+<div class="container">
+    <header>
+        <h1>🐱 Cat Heaven 🐱</h1>
+        <p class="subtitle">The Purrfect Place for Cat Lovers!</p>
+    </header>
+
+    <div class="cat-card">
+        <h2>Welcome to My Feline Paradise</h2>
+        <p>Hello fellow cat enthusiasts! Welcome to my little corner of the internet dedicated to our furry friends.
+            Here you'll find cute pictures, interesting facts, and all things cat-related!</p>
+        <p>I've been a cat lover all my life and currently have three adorable furballs: Whiskers, Luna, and Mr.
+            Mittens.</p>
+        <button class="cat-button">Meet My Cats</button>
+    </div>
+
+    <div class="paw-divider">🐾 🐾 🐾</div>
+
+    <div class="cat-card">
+        <h2>Cat Gallery</h2>
+        <p>Here are some of my favorite cat pictures! Aren't they just the cutest?</p>
+
+        <div class="cat-gallery">
+            <div class="cat-pic floating">😺</div>
+            <div class="cat-pic floating" style="animation-delay: 0.5s">😸</div>
+            <div class="cat-pic floating" style="animation-delay: 1s">😹</div>
+            <div class="cat-pic floating" style="animation-delay: 1.5s">😻</div>
+            <div class="cat-pic floating" style="animation-delay: 2s">😼</div>
+            <div class="cat-pic floating" style="animation-delay: 2.5s">😽</div>
+        </div>
+
+        <button class="cat-button">See More Kitties</button>
+    </div>
+
+    <div class="cat-card">
+        <h2>Fun Cat Facts</h2>
+
+        <div class="cat-facts">
+            <ul>
+                <li>Cats spend about 70% of their lives sleeping!</li>
+                <li>A group of cats is called a "clowder".</li>
+                <li>Cats have 32 muscles in each ear, allowing them to move their ears independently.</li>
+                <li>A cat's purr vibrates at a frequency of 25 to 150 hertz, which can promote healing.</li>
+                <li>Cats can jump up to 6 times their length.</li>
+            </ul>
+        </div>
+
+        <button class="cat-button">More Cat Facts</button>
+    </div>
+
+    <div class="cat-card">
+        <h2>Cat Care Tips</h2>
+        <p>Taking care of our feline friends is important! Here are some basic tips:</p>
+        <ul>
+            <li>Feed your cat a balanced diet appropriate for their age and health.</li>
+            <li>Provide fresh water daily.</li>
+            <li>Regular vet check-ups are essential.</li>
+            <li>Keep the litter box clean.</li>
+            <li>Provide plenty of play and exercise opportunities.</li>
+            <li>Show them lots of love and affection!</li>
+        </ul>
+        <button class="cat-button">Detailed Care Guide</button>
+    </div>
+
+    <div class="paw-divider">🐾 🐾 🐾</div>
+
+    <footer>
+        <p>Made with <span class="rainbow-text">❤️</span> by a Cat Lover</p>
+        <p>© 2023 Cat Heaven | All Rights Reserved</p>
+    </footer>
+</div>
